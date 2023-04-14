@@ -18,17 +18,17 @@ public class TmsApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(TmsApplication.class, args);
 
-		TaskService taskService = context.getBean(TaskServiceImpl.class);
+		// TaskService taskService = context.getBean(TaskServiceImpl.class);
 
-		UserRepository userRepository = context.getBean(UserRepository.class);
+		// UserRepository userRepository = context.getBean(UserRepository.class);
 
-		User assignee = new User("test_username1", "adm123", "email1", "test_fn1", "test_ln1", LocalDateTime.now(), false);
-		User creator = new User("test_username2", "adm123", "email2", "test_fn2", "test_ln2", LocalDateTime.now(), false);
-		userRepository.save(assignee);
-		userRepository.save(creator);
-		Task task1 = new Task("title1", "descr1", LocalDateTime.now(), LocalDateTime.of(2023, 6, 14, 0, 0, 0), assignee, creator);
+		// User assignee = new User("test_username1", "adm123", "email1", "test_fn1", "test_ln1", LocalDateTime.now(), false);
+		// User creator = new User("test_username2", "adm123", "email2", "test_fn2", "test_ln2", LocalDateTime.now(), false);
+		// userRepository.save(assignee);
+		// userRepository.save(creator);
+		// Task task1 = new Task("title1", "descr1", LocalDateTime.now(), LocalDateTime.of(2023, 6, 14, 0, 0, 0), assignee, creator);
 
-		taskService.save(task1);
+		// taskService.save(task1);
 
 		
 	

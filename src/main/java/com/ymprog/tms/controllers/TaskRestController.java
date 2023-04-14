@@ -1,17 +1,18 @@
 package com.ymprog.tms.controllers;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ymprog.tms.entities.Task;
 import com.ymprog.tms.entities.User;
+import com.ymprog.tms.services.TaskListJsonResult;
 import com.ymprog.tms.services.TaskService;
 
 @RestController
@@ -22,7 +23,7 @@ public class TaskRestController {
     private TaskService taskService;
 
     @GetMapping("/search")
-    public List<Task> searchTasks(
+    public ResponseEntity<TaskListJsonResult> searchTasks(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String description,
@@ -34,6 +35,7 @@ public class TaskRestController {
             @RequestParam(required = false) User creator,
             @RequestParam(required = false, defaultValue = "deadline") String sortBy
     ) {
-        return taskService.filterTasks(id, title, description, creationDateFrom, creationDateTo, deadlineFrom, deadlineTo, assignee, creator, sortBy);
+        TaskListJsonResult result = new TaskListJsonResult(taskService.filterTasks(id, title, description, creationDateFrom, creationDateTo, deadlineFrom, deadlineTo, assignee, creator, sortBy));
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 }

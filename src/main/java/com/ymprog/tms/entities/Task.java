@@ -3,6 +3,8 @@ package com.ymprog.tms.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "tasks")
 @Getter@Setter
+@JsonIgnoreProperties({"assignee", "creator"})
 public class Task {
     
     @Id

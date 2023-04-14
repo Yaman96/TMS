@@ -1,14 +1,16 @@
-package com.ymprog.tms.repository;
+package com.ymprog.tms.repositories;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.ymprog.tms.entities.Role;
 import com.ymprog.tms.entities.User;
 
 import jakarta.transaction.Transactional;
 
+@Repository
 public interface UserRepository extends CrudRepository<User,Long> {
 
     User findByUsername(String username);

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Website</title>
+    <!-- Подключение стилей Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Подключение стилей кастомной CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .container {
+        margin-top: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Навигационное меню -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">My Website</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/register">Sign up</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Основное содержимое страницы -->
+    <div class="container mt-5">
+      <h1 class="text-center">Welcome to my website!</h1>
+      <p class="text-center">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id
+        ullamcorper quam. Praesent vel turpis non magna porttitor bibendum at ac
+        tellus. Praesent malesuada nunc vel mi consectetur congue. Fusce
+        condimentum nulla a mi cursus aliquet. Morbi varius bibendum enim eget
+        dignissim. Aliquam gravida ultrices eros vel tristique. Donec imperdiet
+        malesuada turpis, at auctor felis convallis ut. Suspendisse potenti.
+      </p>
+    </div>
+
+    <!-- Подключение скриптов Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

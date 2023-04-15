@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Registration Form</title>
+    <!-- Подключение стилей Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <!-- Подключение стилей библиотеки International Telephone Input -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/libphonenumber-js@1.9.33/umd/libphonenumber-js.min.js"></script>
+    <script src="./country-telephone-data.js"></script>
+    <style>
+      /* добавляем отступ сверху для установки кнопки в правый верхний угол */
+      .navbar-nav {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <a class="btn btn-secondary float-right mt-2" href="/">Home</a>
+        </div>
+        <div class="col-md-6 offset-md-3 mt-5">
+          <h2 class="text-center mb-4">Registration Form</h2>
+          <form method="post" action="/users/register">
+            <div class="form-group">
+              <label for="name">First name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstname"
+                name="firstname"
+                placeholder="Enter your first name"
+                required
+                pattern="[A-Za-z]+"
+                title="Please enter only Latin characters. Example: John, Mary, David, Sarah, etc."
+              />
+            </div>
+            <div class="form-group">
+              <label for="name">Last name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastname"
+                name="lastname"
+                placeholder="Enter your last name"
+                required
+                pattern="[A-Za-z]+"
+                title="Please enter only Latin characters. Example: John, Mary, David, Sarah, etc."
+              />
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                required
+                pattern="[A-Za-z0-9_]+"
+                title="Only Latin characters, numbers and underscores are allowed. Example: john_smith123"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+                pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.{8,})[A-Za-z\d!@#$&*]+$"
+                title="Password must contain at least 8 characters, including 1 uppercase letter and 1 symbol from the list !@#$&*. Example: John123!"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                title="Please enter a valid email address."
+              />
+            </div>
+            <!-- Поле для ввода номера телефона с всплывающим списком кодов стран мира
+            <div class="form-group">
+              <label for="phone" class="block mb-2 font-semibold"
+                >Phone Number</label
+              ><br>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                name="phone"
+                required
+              />
+            </div> -->
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+          <div th:if="${error}" class="alert alert-danger mt-3">
+            <p th:text="${error}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Подключение скриптов Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Подключение скриптов библиотеки International Telephone Input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
+    <script>
+      // Инициализация поля для ввода номера телефона с всплывающим списком кодов стран мира
+      var input = document.querySelector("#phone");
+      window.intlTelInput(input, {
+        preferredCountries: ["tr", "ru", "ua", "sy", "ir", "sa", "af"],
+        autoPlaceholder: "aggressive",
+        autoFormat: true,
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
+      });
+
+      // Обработчик отправки формы
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var iti = window.intlTelInputGlobals.getInstance(input);
+          var fullPhoneNumber = iti.getNumber();
+
+          if (iti.isValidNumber()) {
+            document.querySelector("#phone").value = fullPhoneNumber;
+            this.submit();
+          } else {
+            alert("Please enter a valid phone number.");
+          }
+        });
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

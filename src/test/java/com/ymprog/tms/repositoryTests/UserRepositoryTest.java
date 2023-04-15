@@ -27,7 +27,6 @@ public class UserRepositoryTest {
     public void testFindByUsername() {
         User user = new User();
         user.setUsername("testuser");
-        user.setEmail("test@example.com");
         userRepository.save(user);
 
         User foundUser = userRepository.findByUsername("testuser");
@@ -39,7 +38,6 @@ public class UserRepositoryTest {
     @Test
     public void testFindByEmail() {
         User user = new User();
-        user.setUsername("testuser");
         user.setEmail("test@example.com");
         userRepository.save(user);
 
@@ -52,8 +50,6 @@ public class UserRepositoryTest {
     @Test
     public void testFindById() {
         User user = new User();
-        user.setUsername("testuser");
-        user.setEmail("test@example.com");
         User savedUser = userRepository.save(user);
 
         User foundUser = userRepository.findById(savedUser.getId());
@@ -65,8 +61,6 @@ public class UserRepositoryTest {
     @Test
     public void testDeleteById() {
         User user = new User();
-        user.setUsername("testuser");
-        user.setEmail("test@example.com");
         User savedUser = userRepository.save(user);
 
         userRepository.deleteById(savedUser.getId());
@@ -78,12 +72,8 @@ public class UserRepositoryTest {
     @Test
     public void testFindAll() {
         User user1 = new User();
-        user1.setUsername("testuser1");
-        user1.setEmail("test1@example.com");
 
         User user2 = new User();
-        user2.setUsername("testuser2");
-        user2.setEmail("test2@example.com");
 
         userRepository.save(user1);
         userRepository.save(user2);
@@ -98,7 +88,6 @@ public class UserRepositoryTest {
     public void testSaveUserWithRole() {
         User user = new User();
         user.setUsername("testuser");
-        user.setEmail("test@example.com");
         
         Set<Role> roles = new HashSet<>();
         Role role = new Role();

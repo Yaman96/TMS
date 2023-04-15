@@ -1,16 +1,11 @@
 package com.ymprog.tms;
 
-import java.time.LocalDateTime;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import com.ymprog.tms.entities.Task;
-import com.ymprog.tms.entities.User;
-import com.ymprog.tms.repositories.UserRepository;
-import com.ymprog.tms.services.TaskService;
-import com.ymprog.tms.services.TaskServiceImpl;
+import com.ymprog.tms.entities.Role;
+import com.ymprog.tms.repositories.RoleRepository;
 
 @SpringBootApplication
 public class TmsApplication {
@@ -30,8 +25,17 @@ public class TmsApplication {
 
 		// taskService.save(task1);
 
+		RoleRepository roleRepository = context.getBean(RoleRepository.class);
+
+		Role role1 = new Role();
+		role1.setName("ROLE_USER");
+		role1.setDescription("Users role");
+
+		Role role2 = new Role();
+		role2.setName("ROLE_ADMIN");
+		role2.setDescription("Admins role");
+
 		
-	
 	}
 
 }

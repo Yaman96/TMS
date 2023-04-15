@@ -1,5 +1,6 @@
 package com.ymprog.tms.repositories;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +22,7 @@ public interface UserRepository extends CrudRepository<User,Long> {
 
     @Transactional
     default void saveUserWithRole(User user, Role role) {
+        user.setRoles(new HashSet<>());
         user.getRoles().add(role);
         save(user);
     }
